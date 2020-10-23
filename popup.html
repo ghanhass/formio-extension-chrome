@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel='stylesheet' href='./popup.css'>
+    </head>
+    <body>
+        <div id='formio-helper'>
+            <button id="custom-youtube" type='button'>custom youtube</button>
+            <h3 id='formio-title'><center>Formio.js helper</center></h3>
+            <div class='menus-container'>
+                <div class='select-container'>
+                    <label>Forms: </label>
+                    <select id='formio-forms-list' class='formioNotFound'>
+                        <option value='' selected>No formio found</option>
+                    </select>
+                </div>
+
+                <div class='select-container'>
+                    <label>Actions : </label>
+                    <select id='actionsMenuSelect' disabled class='formioNotFound'>
+                        <option value='' selected>No formio found</option>
+                        <option value='1'>Get/Set form components object</option>
+                        <!--<option value='2'>Execute a Formio function</option>-->
+                        <option value='3'>Execute a custom function on components</option>
+                        <option value='4'>Get/Set form data</option>
+                        <!--<option value='5'>Autofill form</option>-->
+                        <option value='6'>Empty form</option>
+                        <option value='7'>Restore original form</option>
+                    </select>
+                </div>
+                <div id='formioDetectionStatus' class='formioNotFound'></div>
+                <span id='alerts'></span>
+            </div>
+            <!---->
+            <div class='actionsMenuItemContainer'>
+                <div data-actionid="1" class='actionsMenuItem'>
+                    <div style='display:flex; justify-content: space-between;'>
+                        <button type="button"  style='max-width:45%' id='btnGetComponentsObject'>Get form components object</button>
+                        <button type='button'  style='max-width:45%' id='copyComponentsObject'>Copy object to clipboard</button>
+                    </div>
+                    <pre data-actionid="1" contenteditable="true"></pre>
+                    <textarea data-actionid="1"></textarea>
+                    <button type="button" style="max-width:45%" id="setComponentsObjectBtn">Submit</button>
+                </div>
+                <!---->
+                <div data-actionid="2" class='actionsMenuItem'>
+                    
+                    <div style='display:flex;'>
+                        <button type='button' style='max-width:45%' id='executeFormioFunctionBtn'>Submit</button>
+                    </div>
+                    <pre data-actionid="2" contenteditable="true"></pre>
+                </div>
+                <!---->
+                <div data-actionid="3" class="actionsMenuItem">
+                    <div style="display: flex;margin-bottom: 10px;">
+                        <span style="margin-right: 10px;">Useful variables: </span>
+                        <span><strong>component</strong></span>
+                    </div>
+                    <div style="display: flex;">
+                        <span style="margin-right: 10px;">Useful functions: </span>
+                        <div>
+                            <div>
+                                <strong>setFormdata(componentKey, newValue)</strong>
+                            </div>
+                            <div><strong>getFormdata(componentKey)</strong></div>
+                        </div>
+                    </div> 
+                    
+                    <button type="button" style="max-width:45%" id="btnExecuteFunction">Submit</button>
+                    <pre data-actionid="3" contenteditable="true"></pre>
+                </div>
+                <!---->
+                <div data-actionid="4" class='actionsMenuItem'>
+                    <div style='display:flex; justify-content:space-between;'>
+                        <button type="button" id='btnGetFormData'>Get form data</button>
+                        <button type='button' id='btnCopyFormData'>Copy form data to clipboard</button>
+                    </div>
+                    <pre data-actionid="4" contenteditable="true"></pre>
+                    <textarea data-actionid="4"></textarea>
+                    <button type="button" style="max-width:45%" id="setFormDataBtn">Submit</button>
+                </div>
+                <!---->
+                <div data-actionid="5" class='actionsMenuItem'>
+                    <button type='button' id='btnAutofillForm'>Autofill form</button>
+                </div>
+                <!---->
+                <div data-actionid="6" class='actionsMenuItem'>
+                    <button type='button' id='btnEmptyForm'>Empty form</button>
+                </div>
+                <!---->
+                <div data-actionid="7" class='actionsMenuItem'>
+                    <button type='button' id='btnRestoreOriginalForm'>Restore original form</button>
+                </div>
+                <!---->
+            </div>
+        </div>
+        
+        <script src='popup.js'></script>
+    </body>
+</html>
