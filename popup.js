@@ -18,10 +18,10 @@ function restoreUI(popupUIState){
                 actionsMenuSelect.value = obj.selectedItem;
                 formioFormsList.value = obj.selectedForm;
                 selectedForm = formioFormsList.value;
-                let shownActionsMenuItemd = document.querySelector(obj.shownActionsMenuItem);
+                let shownActionsMenuItem = document.querySelector(obj.shownActionsMenuItem);
                 let shownPreElement = document.querySelector(obj.shownPreElement);
-                if(shownActionsMenuItemd){
-                    shownActionsMenuItemd.classList.add('actionsMenuItemSelected');
+                if(shownActionsMenuItem){
+                    shownActionsMenuItem.classList.add('actionsMenuItemSelected');
                 }
                 if(shownPreElement){
                     shownPreElement.textContent = obj.preElementText;
@@ -154,10 +154,12 @@ document.addEventListener('DOMContentLoaded', function(){
             else if(msgObj.status == 'fail' && !isFormFoundAtAll){//nothing at all? lolz
                 formioDetectionStatus.classList.add('formioNotFound');
                 formioDetectionStatus.classList.remove('formioFound');
+                formioFormsList.disabled = true;
+                formioFormsList.innerHTML = '<option value="">--No formio found--</option>';
+
                 actionsMenuSelect.value = ''
                 actionsMenuSelect.disabled = true;
                 actionsMenuSelect.querySelector("option[value='']").textContent = 'No formio found';
-                formioFormsList.innerHTML = '<option value="">--No formio found--</option>';
             }
         }  
         else if (msgObj.message == 'extGetComponentsObjectResponseMessage'){//extGetComponentsObjectResponseMessage extension message from contentscript

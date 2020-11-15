@@ -179,27 +179,29 @@ document.addEventListener("domInitEvent", function(event){ //domInitEvent event'
         console.log("A");
         initNewStyleSheet();
         var forms = formioApi.forms;
-        var formIds = Object.keys(forms);
-        var foundForms = formIds.map((id)=>{
-            return ({"windowId": window.windowId, "formid": id});
-        });
-        if(!formComponentsOriginal.length && !formDataOriginal.length){
-            for(var index = 0; index < formIds.length; index++){
-                var currentForm = forms[formIds[index]];
-                if(currentForm.id){ //formio's webfom is set ??
-                    //save original form components objects
-                    formComponentsOriginal.push({"formid": currentForm.id, "components": JSON.stringify({components: currentForm.component.components})});
-                    //save original form data objects
-                    formDataOriginal.push( {"formid": currentForm.id, "data": JSON.stringify({data: currentForm.data})} );
+        if(forms !== undefined){
+            var formIds = Object.keys(forms);
+            var foundForms = formIds.map((id)=>{
+                return ({"windowId": window.windowId, "formid": id});
+            });
+            if(!formComponentsOriginal.length && !formDataOriginal.length){
+                for(var index = 0; index < formIds.length; index++){
+                    var form = forms[formIds[index]];
+                    if(form.id){ //formio's webfom is set ??
+                        //save original form components objects
+                        formComponentsOriginal.push({"formid": form.id, "components": JSON.stringify({components: form.component.components})});
+                        //save original form data objects
+                        formDataOriginal.push( {"formid": form.id, "data": JSON.stringify({data: form.data})} );
+                    }
                 }
             }
+            document.dispatchEvent( new CustomEvent('domInitResponseEvent',{
+                detail:{
+                    status : 'success',
+                    foundForms: JSON.stringify(foundForms)
+                }
+            }));
         }
-        document.dispatchEvent( new CustomEvent('domInitResponseEvent',{
-            detail:{
-                status : 'success',
-                foundForms: JSON.stringify(foundForms)
-            }
-        }));
     }
     else{
         //console.log("C");

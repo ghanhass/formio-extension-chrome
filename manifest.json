@@ -1,7 +1,7 @@
 {
-    "name": "Formio.js helper",
+    "name": "Formio.js helper for chrome ",
     "version": "0.0.1",
-    "description": "Helper tools for formio.js",
+    "description": "Helper tools for Formio.js",
     "permissions": ["tabs", "activeTab"],
     "background": {
         "scripts": ["background.js"],
@@ -15,7 +15,8 @@
             "32": "images/logo.png",
             "64": "images/logo.png",
             "128": "images/logo.png"
-        }
+        },
+        "default_title":"Formio.js helper"
     },
     "content_scripts": [
         {
