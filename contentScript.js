@@ -7,10 +7,10 @@ s.onload = function(){
     window.isScriptLoaded = true;
 };
 /*START chrome.runtime events/messages */
-chrome.runtime.onConnect.addListener(function(port){
+chrome.runtime.onConnect.addListener(function(port){ //listen to connector events/messages
     console.log("onConnect port = ", port);
-    if(port.name == 'popup'){ //popup disconnected ?
-        port.onDisconnect.addListener((port)=>{
+    if(port.name == 'popup'){ 
+        port.onDisconnect.addListener((port)=>{//popup disconnected ?
             console.log('port disconnect!', port);
             document.dispatchEvent(new Event("domPopupDisconnectEvent"));
         });

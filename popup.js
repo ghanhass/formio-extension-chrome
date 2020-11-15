@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function(){
     chrome.tabs.query({active: true, currentWindow: true}, function(arrTabs){
         let activeTab = arrTabs[0];
         chrome.tabs.sendMessage(activeTab.id, JSON.stringify({message: 'extInitMessage'}));
-        var port = chrome.tabs.connect(activeTab.id, {name: "popup"});
+        var port = chrome.tabs.connect(activeTab.id, {name: "popup"}); // initiate connector named "popup"
         //console.log('init message sent for tab: ', activeTab.id);
     });
 
