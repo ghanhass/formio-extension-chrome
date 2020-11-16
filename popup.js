@@ -66,7 +66,7 @@ function saveUI(){
     //}
 }
 
-document.addEventListener('DOMContentLoaded', function(){
+window.addEventListener('load', function(){
     document.querySelector("#custom-youtube").addEventListener("click", (event)=>{
         chrome.tabs.query({active: true, currentWindow: true}, function(arrTabs){
             let activeTab = arrTabs[0];
@@ -93,25 +93,37 @@ document.addEventListener('DOMContentLoaded', function(){
     var btnGetComponentsObject = document.querySelector('#btnGetComponentsObject');
     var copyComponentsObject = document.querySelector('#copyComponentsObject');
     var componentsObjectTextarea =  document.querySelector("textarea[data-actionid='1']");
-    var componentsObjectPre =  document.querySelector("pre[data-actionid='1']");
+
+    var componentsEditor = ace.edit("ace-editor-components");
+    componentsEditor.setTheme("ace/theme/textmate");
+    componentsEditor.session.setMode("ace/mode/json");
+
+    //var componentsObjectPre =  document.querySelector("pre[data-actionid='1']");
 
     var btnGetFormData = document.querySelector('#btnGetFormData');
     var btnCopyFormData = document.querySelector('#btnCopyFormData');
     var formDataTextarea =  document.querySelector("textarea[data-actionid='4']");
-    var formDataPre =  document.querySelector("pre[data-actionid='4']");
+    //var formDataPre =  document.querySelector("pre[data-actionid='4']");
+    
+    var formdataEditor = ace.edit("ace-editor-formdata");
+    formdataEditor.setTheme("ace/theme/textmate");
+    formdataEditor.session.setMode("ace/mode/json");
 
     var btnExecuteFunction = document.querySelector('#btnExecuteFunction');
-    var functionOnTraversePre =  document.querySelector("pre[data-actionid='3']");
+    //var functionOnTraversePre =  document.querySelector("pre[data-actionid='3']");
+    var customCodeEditor = ace.edit("ace-editor-customcode");
+    customCodeEditor.setTheme("ace/theme/textmate");
+    customCodeEditor.session.setMode("ace/mode/javascript");
 
     var btnExecuteFormioFunction = document.querySelector('#btnExecuteFormioFunction');
     var btnRestoreOriginalForm = document.querySelector('#btnRestoreOriginalForm');
     var btnEmptyForm = document.querySelector('#btnEmptyForm');
 
     var setComponentsObjectBtn = document.querySelector('#setComponentsObjectBtn');
-    var setComponentsObjectPre =  document.querySelector("pre[data-actionid='1']");
+    //var setComponentsObjectPre =  document.querySelector("pre[data-actionid='1']");
 
     var setFormDataBtn = document.querySelector('#setFormDataBtn');
-    var setFormDataPre =  document.querySelector("pre[data-actionid='4']");
+    //var setFormDataPre =  document.querySelector("pre[data-actionid='4']");
 
 
 
@@ -165,7 +177,8 @@ document.addEventListener('DOMContentLoaded', function(){
         else if (msgObj.message == 'extGetComponentsObjectResponseMessage'){//extGetComponentsObjectResponseMessage extension message from contentscript
             if(msgObj.status == 'success'){
                 if(msgObj.data){
-                    componentsObjectPre.textContent = msgObj.data;
+                    //componentsObjectPre.textContent = msgObj.data;
+                    componentsEditor.setValue(msgObj.data);
                     saveUI();
                 }
             }
@@ -175,7 +188,8 @@ document.addEventListener('DOMContentLoaded', function(){
         else if (msgObj.message == 'extGetFormDataResponseMessage'){//extGetFormDataResponseMessage extension message from contentscript
             if(msgObj.status == 'success'){
                 if(msgObj.data){
-                    document.querySelector("pre[contenteditable='true'][data-actionid='4']").textContent = msgObj.data;
+                    //document.querySelector("pre[contenteditable='true'][data-actionid='4']").textContent = msgObj.data;
+                    formdataEditor.setValue(msgObj.data);
                     saveUI();
                 }
             }
@@ -250,7 +264,8 @@ document.addEventListener('DOMContentLoaded', function(){
     });
     ////
     copyComponentsObject.addEventListener('click', function(event){// copy form components object
-        componentsObjectTextarea.value = componentsObjectPre.textContent;
+        //componentsObjectTextarea.value = componentsObjectPre.textContent;
+        componentsObjectTextarea.value = componentsEditor.getValue();
         componentsObjectTextarea.select();
         if(document.execCommand('copy', null)){
             alertMsg(alertsSpan, 'Object copied!');
@@ -264,7 +279,8 @@ document.addEventListener('DOMContentLoaded', function(){
     });
     ////
     btnCopyFormData.addEventListener('click', function(event){// copy form data object
-        formDataTextarea.value = formDataPre.textContent;
+        //formDataTextarea.value = formDataPre.textContent;
+        formDataTextarea.value = formdataEditor.getValue();
         formDataTextarea.select();
         if(document.execCommand('copy', null)){
             alertMsg(alertsSpan, 'Object copied!');
@@ -294,7 +310,8 @@ document.addEventListener('DOMContentLoaded', function(){
         chrome.tabs.query({active: true, currentWindow: true}, function(arrTabs){
             chrome.tabs.sendMessage(arrTabs[0].id, JSON.stringify({
                 message: 'extRunFunctionOnTraverseMessage', 
-                data: functionOnTraversePre.textContent, 
+                //data: functionOnTraversePre.textContent, 
+                data: customCodeEditor.getValue(),
                 selectedForm: selectedForm
             }))
         });
@@ -304,7 +321,8 @@ document.addEventListener('DOMContentLoaded', function(){
         chrome.tabs.query({active: true, currentWindow: true}, function(arrTabs){
             chrome.tabs.sendMessage(arrTabs[0].id, JSON.stringify({
                 message: 'extSetComponentsObjectMessage', 
-                data: setComponentsObjectPre.textContent,
+                //data: setComponentsObjectPre.textContent,
+                data: componentsEditor.getValue(),
                 selectedForm: selectedForm
             }))
         });
@@ -314,7 +332,8 @@ document.addEventListener('DOMContentLoaded', function(){
         chrome.tabs.query({active: true, currentWindow: true}, function(arrTabs){
             chrome.tabs.sendMessage(arrTabs[0].id, JSON.stringify({
                 message: 'extSetFormDataObjectMessage', 
-                data: setFormDataPre.textContent,
+                //data: setFormDataPre.textContent,
+                data: formdataEditor.getValue(),
                 selectedForm: selectedForm
             }))
         });

@@ -21,8 +21,8 @@
                         <option value='' selected>No formio found</option>
                         <option value='1'>Get/Set form components object</option>
                         <!--<option value='2'>Execute a Formio function</option>-->
-                        <option value='3'>Execute a custom function on components</option>
                         <option value='4'>Get/Set form data</option>
+                        <option value='3'>Execute a custom code on components</option>
                         <!--<option value='5'>Autofill form</option>-->
                         <option value='6'>Empty form</option>
                         <option value='7'>Restore original form</option>
@@ -35,18 +35,19 @@
             <div class='actionsMenuItemContainer'>
                 <div data-actionid="1" class='actionsMenuItem'>
                     <div style='display:flex; justify-content: space-between;'>
-                        <button type="button"  style='max-width:45%' id='btnGetComponentsObject'>Get form components object</button>
-                        <button type='button'  style='max-width:45%' id='copyComponentsObject'>Copy object to clipboard</button>
+                        <button type="button"  style='max-width:45%' id='btnGetComponentsObject' class="btn">Get form components object</button>
+                        <button type='button'  style='max-width:45%' id='copyComponentsObject' class="btn">Copy object to clipboard</button>
+                        <button type="button" style="max-width:45%" id="setComponentsObjectBtn" class="btn">Submit</button>
                     </div>
-                    <pre data-actionid="1" contenteditable="true"></pre>
+                    <!--<pre data-actionid="1" contenteditable="true"></pre>-->
                     <textarea data-actionid="1"></textarea>
-                    <button type="button" style="max-width:45%" id="setComponentsObjectBtn">Submit</button>
+                    <div id="ace-editor-components" class="code-editor"></div>
                 </div>
                 <!---->
                 <div data-actionid="2" class='actionsMenuItem'>
                     
                     <div style='display:flex;'>
-                        <button type='button' style='max-width:45%' id='executeFormioFunctionBtn'>Submit</button>
+                        <button type='button' style='max-width:45%' id='executeFormioFunctionBtn' class="btn">Submit</button>
                     </div>
                     <pre data-actionid="2" contenteditable="true"></pre>
                 </div>
@@ -66,35 +67,42 @@
                         </div>
                     </div> 
                     
-                    <button type="button" style="max-width:45%" id="btnExecuteFunction">Submit</button>
-                    <pre data-actionid="3" contenteditable="true"></pre>
+                    <div style="text-align: right;">
+                        <button type="button" id="btnExecuteFunction" class="btn">Submit</button>
+                    </div>
+                    <!--<pre data-actionid="3" contenteditable="true"></pre>-->
+                    <div id="ace-editor-customcode" class="code-editor"></div>
                 </div>
                 <!---->
                 <div data-actionid="4" class='actionsMenuItem'>
                     <div style='display:flex; justify-content:space-between;'>
-                        <button type="button" id='btnGetFormData'>Get form data</button>
-                        <button type='button' id='btnCopyFormData'>Copy form data to clipboard</button>
+                        <button type="button" id='btnGetFormData' class="btn">Get form data</button>
+                        <button type='button' id='btnCopyFormData' class="btn">Copy form data to clipboard</button>
+                        <button type="button" style="max-width:45%" id="setFormDataBtn" class="btn">Submit</button>
                     </div>
-                    <pre data-actionid="4" contenteditable="true"></pre>
+                    <!--<pre data-actionid="4" contenteditable="true"></pre>-->
                     <textarea data-actionid="4"></textarea>
-                    <button type="button" style="max-width:45%" id="setFormDataBtn">Submit</button>
+                    <div id="ace-editor-formdata" class="code-editor"></div>
                 </div>
                 <!---->
                 <div data-actionid="5" class='actionsMenuItem'>
-                    <button type='button' id='btnAutofillForm'>Autofill form</button>
+                    <button type='button' id='btnAutofillForm' class="btn">Autofill form</button>
                 </div>
                 <!---->
                 <div data-actionid="6" class='actionsMenuItem'>
-                    <button type='button' id='btnEmptyForm'>Empty form</button>
+                    <button type='button' id='btnEmptyForm' class="btn" >Empty form</button>
                 </div>
                 <!---->
                 <div data-actionid="7" class='actionsMenuItem'>
-                    <button type='button' id='btnRestoreOriginalForm'>Restore original form</button>
+                    <button type='button' id='btnRestoreOriginalForm' class="btn">Restore original form</button>
                 </div>
                 <!---->
             </div>
         </div>
         
+        <script src="ace/ace.js"></script>
+        <script src="ace/mode-javascript.js"></script>
+        <script src="ace/theme-monokai.js"></script>
         <script src='popup.js'></script>
     </body>
 </html>

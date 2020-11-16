@@ -317,7 +317,7 @@ document.addEventListener("domRunFunctionOnTraverseEvent", function(event){ //do
         }
     }
     else{
-        document.dispatchEvent( new CustomEvent('domGetFormDataResponseEvent',{
+        document.dispatchEvent( new CustomEvent('domRunFunctionOnTraverseEvent',{
             detail:{
                 status : 'fail'
             }

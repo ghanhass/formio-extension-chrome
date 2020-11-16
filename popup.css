@@ -1,20 +1,44 @@
 html{
     width: 700px;
-    max-height: 700px;
+    height: 600px;
 }
 
 button{
     max-height: 23px;
 }
 
+.actionsMenuItem {
+    position: relative;
+    height: 100%;
+}
+
 .actionsMenuItem:not(.actionsMenuItemSelected){
     display: none;
 }
+
+.actionsMenuItemContainer{
+    flex-grow:1;
+}
+
+#formio-helper {
+    height: calc(100vh - 16px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#formio-helper > div {
+    width: 100%;
+}
+
 .no-form-selected{
     display: none;
 }
 
-#formio-forms-list{width: 100%;}
+#formio-forms-list{
+    width: 100%;
+}
+
 #actionsMenuSelect{
     width:100%;
 }
@@ -33,6 +57,7 @@ textarea{
     left:-9999px;
     max-height: 566px;
 }
+
 pre[contenteditable='true']{
     width: 100%;
     min-height: 403px;
@@ -48,14 +73,18 @@ pre[contenteditable='true']{
     line-height: 15px;
 }
 
-.menus-container{
-    margin-bottom:5px;
-    display:flex;
+.menus-container {
+    margin-bottom: 12px;
+    display: flex;
     align-items: flex-end;
 }
 
 .menus-container > .select-container{
     min-width:100px;
+}
+
+.menus-container > .select-container:first-child {
+    margin-right: 10px;
 }
 
 #formioDetectionStatus{
@@ -67,11 +96,18 @@ pre[contenteditable='true']{
     margin-left: 4px;
 }
 
-#formioDetectionStatus.formioFound{background-color: #1cc91c;}
-#formioDetectionStatus.formioNotFound{background-color: #c91c1c;}
+#formioDetectionStatus.formioFound{
+    background-color: #1cc91c;
+}
+
+#formioDetectionStatus.formioNotFound{
+    background-color: #c91c1c;
+}
 
 #formio-title{
     margin: 0 0 5px 0px;
+    text-align: center;
+    width: 100%;
 }
 
 #alerts{
@@ -82,4 +118,44 @@ pre[contenteditable='true']{
     right: 5px;
     top: 18px;
     z-index: 2;
+}
+
+.code-editor {
+    position: absolute;
+    border: 1px solid rgb(179, 209, 255);
+    border-radius: 2px;
+    overflow: auto;
+    padding: 2px;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    font-size: 12px;
+    line-height: 15px;
+}
+
+#ace-editor-components {
+    top: 35px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: calc(100% - 44px);
+}
+
+#ace-editor-formdata {
+    top: 35px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: calc(100% - 44px);
+}
+
+#ace-editor-customcode {
+    top: 91px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: calc(100% - 99px);
+}
+
+.btn{
+    
 }
