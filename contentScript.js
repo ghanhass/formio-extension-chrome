@@ -1,7 +1,7 @@
 window.popupUIState = undefined;
 var script = document.createElement('script');
 script.src = chrome.extension.getURL('script.js');
-(document.head || document.documentElement).appendChild(s);
+(document.head || document.documentElement).appendChild(script);
 script.onload = function(){
     console.log('script.js loaded and executed !');
     window.isScriptLoaded = true;
